@@ -1,112 +1,115 @@
-.app-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-right: 46px;
+@import url("https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=IBM+Plex+Mono:wght@500;600&family=Outfit:wght@400;500;600;700;800&display=swap");
+@import "tailwindcss";
+
+@theme {
+  --font-family-sans: "DM Sans", ui-sans-serif, system-ui, sans-serif;
+  --font-family-heading: "Outfit", ui-sans-serif, sans-serif;
+  --font-family-mono: "IBM Plex Mono", ui-monospace, monospace;
+
+  --color-brand-50: #f0fdfa;
+  --color-brand-100: #ccfbf1;
+  --color-brand-200: #99f6e4;
+  --color-brand-500: #14b8a6;
+  --color-brand-600: #0d9488;
+  --color-brand-700: #0f766e;
+  --color-brand-800: #115e59;
+  --color-brand-900: #134e4a;
+}
+
+@keyframes fade-in-up {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
   }
-  
-  .profile-button {
-    display: flex;
-    align-items: center;
-    padding: 10px 20px;
-    border: black;
-    border-radius: 25px;
-    background-color: #fff;
-    color:black;
-    font-size: 32px;
-    cursor: pointer;
-    transition: background-color 0.3s, color 0.3s;
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
-  
-  /* .profile-button:hover {
-    background-color: #23c1cb;
-    color: #fff;
-  } */
-  
-  .profile-name {
-    margin-right: 10px;
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
   }
-  
-  .profile-icon {
-    font-size: 20px;
+  to {
+    opacity: 1;
   }
-  .dropdown {
-    position: relative;
-    display: inline-block;
+}
+
+@keyframes float-soft {
+  0%,
+  100% {
+    transform: translateY(0);
   }
-  .dropdown-menu {
-    display: block;
-    position: absolute;
-    background-color: white;
-    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-    z-index: 1;
-    bottom: -11%;
+  50% {
+    transform: translateY(-8px);
   }
-  
-  .dropdown-menu a {
-    color: black;
-    padding: 12px 16px;
-    text-decoration: none;
-    display: block;
+}
+
+@keyframes scale-in {
+  from {
+    opacity: 0;
+    transform: scale(0.96);
   }
-  
-  .dropdown-menu a:hover {
-    background-color: #ddd;
+  to {
+    opacity: 1;
+    transform: scale(1);
   }
-  .form-container {
-    display: flex;
-    flex-direction: column;
-    width: 28%;
-    margin: 57px 614px;
+}
+
+@keyframes shimmer-bg {
+  0% {
+    background-position: 0% 50%;
   }
-  
-  .form-container label {
-    margin-bottom: 10px;
+  100% {
+    background-position: 100% 50%;
   }
-  
-  .form-container input,
-  .form-container textarea {
-    width: 100%;
-    padding: 8px;
-    margin-top: 5px;
-    margin-bottom: 15px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
+}
+
+@layer utilities {
+  .animate-fade-in-up {
+    animation: fade-in-up 0.65s cubic-bezier(0.22, 1, 0.36, 1) both;
   }
-  
-  .form-container button {
-    padding: 10px;
-    background-color: #4CAF50;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
+
+  .animate-fade-in {
+    animation: fade-in 0.7s ease-out both;
   }
-  
-  .form-container button:hover {
-    background-color: #45a049;
+
+  .animate-float-soft {
+    animation: float-soft 5s ease-in-out infinite;
   }
-.addequip-label{
-  font-family: sans-serif;
-    font-size: 24px;
-}  
- .save-button{
-  background-color: white;
-  color: black;
-  border-radius: 10em;
-  font-size: 17px;
-  font-weight: 600;
-  padding: 1em 2em;
-  cursor: pointer;
-  transition: all 0.3s ease-in-out;
-  border: 1px solid black;
-  box-shadow: 0 0 0 0 black;
- } 
- .save-button:hover{
-  transform: translateY(-4px) translateX(-2px);
-  box-shadow: 2px 5px 0 0 black;
-};
-  .save-button:active {
-    transform: translateY(2px) translateX(1px);
-    box-shadow: 0 0 0 0 black;
-  };
+
+  .animate-scale-in {
+    animation: scale-in 0.5s cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+
+  .animate-shimmer-bg {
+    background-size: 200% 200%;
+    animation: shimmer-bg 8s ease infinite alternate;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .animate-fade-in-up,
+    .animate-fade-in,
+    .animate-float-soft,
+    .animate-scale-in,
+    .animate-shimmer-bg {
+      animation: none !important;
+      opacity: 1;
+      transform: none;
+    }
+  }
+}
+
+@layer base {
+  body {
+    @apply bg-slate-50 font-sans text-slate-800 antialiased;
+  }
+
+  h1,
+  h2,
+  h3 {
+    font-family: var(--font-family-heading), ui-sans-serif, sans-serif;
+    @apply tracking-tight text-slate-900;
+  }
+}

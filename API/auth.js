@@ -46,7 +46,7 @@ const addEquipment = async (userData) => {
     throw error;
   }
 };
-const getEquipments = async (userData) => {
+const getEquipments = async () => {
   try {
     const response = await axios.get(`${beUrl}/addEquip`, {
       headers: {
